@@ -26,17 +26,8 @@ module.exports = {
       birthDay: {
         type: Sequelize.STRING,
       },
-      idTax: {
-        type: Sequelize.STRING,
-      },
-      permanentAddress: {
-        type: Sequelize.TEXT,
-      },
       address: {
         type: Sequelize.TEXT,
-      },
-      service: {
-        type: Sequelize.STRING,
       },
       roleId: {
         type: Sequelize.STRING,
