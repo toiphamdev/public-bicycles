@@ -9,13 +9,16 @@ const salt = bcrypt.genSaltSync(10);
 const createNewUserService = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
+      console.log(data);
       if (!data.email && !data.password) {
         resolve({
           errCode: 1,
           errMessage: 'Missing required parameter',
         });
       } else {
-        const password = bcrypt.hashSync(data.password, salt);
+        const password = data.password
+          ? bcrypt.hashSync(data.password, salt)
+          : '';
         let userExist = await db.User.findOne({
           where: {
             email: data.email,
@@ -33,10 +36,7 @@ const createNewUserService = (data) => {
             phoneNumber: data.phoneNumber,
             password: password,
             birthDay: data.birthDay,
-            idTax: data.idTax,
-            permanentAddress: data.permanentAddress,
             address: data.address,
-            service: data.service,
           });
           resolve({
             errCode: 0,
@@ -85,6 +85,7 @@ const handleUserLoginService = (data) => {
           if (password) {
             delete user.password;
             let accessToken = createJWT(user.id, '48h');
+            console.log(accessToken, user);
             await db.User.update(
               {
                 isLogin: true,
