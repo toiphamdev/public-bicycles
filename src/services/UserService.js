@@ -84,7 +84,7 @@ const handleUserLoginService = (data) => {
           );
           if (password) {
             delete user.password;
-            let accessToken = createJWT({ id: user.id }, '48h');
+            let accessToken = createJWT({ id: 3 }, '48h');
             console.log(accessToken, user);
             await db.User.update(
               {
