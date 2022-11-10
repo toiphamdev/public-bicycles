@@ -5,7 +5,7 @@ const getAllPlaceService = () => {
   return new Promise(async (resolve, reject) => {
     try {
       let data = await db.Place.findAll({
-        attribute: ['src', 'id'],
+        attributes: ['src', 'id'],
       });
       if (data && data.length > 0) {
         data.map((item) => {
@@ -75,7 +75,7 @@ const getPlaceByProvinceIdService = (data) => {
         const page = +data.page;
         const size = +data.size;
         let res = await db.Place.findAll({
-          attribute: ['src', 'id', 'altText', 'caption'],
+          attributes: ['src', 'id', 'altText', 'caption'],
           where: {
             provinceId: data.provinceId,
           },
