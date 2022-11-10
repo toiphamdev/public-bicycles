@@ -39,7 +39,7 @@ const getDetailPlaceService = (id) => {
           errMessage: 'Missing required parameter!',
         });
       } else {
-        let res = db.Place.findOne({
+        let res = await db.Place.findOne({
           where: {
             id: id,
           },
