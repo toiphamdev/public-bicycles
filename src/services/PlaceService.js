@@ -74,7 +74,7 @@ const getPlaceByProvinceIdService = (data) => {
       } else {
         const page = +data.page;
         const size = +data.size;
-        let data = await db.Place.findAll({
+        let res = await db.Place.findAll({
           attribute: ['src', 'id', 'altText', 'caption'],
           where: {
             provinceId: data.provinceId,
@@ -84,17 +84,17 @@ const getPlaceByProvinceIdService = (data) => {
           nest: true,
           raw: false,
         });
-        if (data && data.length > 0) {
-          data.map((item) => {
+        if (res && res.length > 0) {
+          res.map((item) => {
             item.src = Buffer.from(item.src, 'base64').toString('binary');
             return item;
           });
         }
-        if (data) {
+        if (res) {
           resolve({
             errCode: 0,
             errMessage: 'get place success!',
-            data: data,
+            data: res,
           });
         } else {
           resolve({
