@@ -1,4 +1,5 @@
 const db = require('../models');
+const _ = require('lodash');
 
 const getAllPlaceService = () => {
   return new Promise(async (resolve, reject) => {
@@ -43,7 +44,7 @@ const getDetailPlaceService = (id) => {
             id: id,
           },
         });
-        if (res) {
+        if (!_.isEmpty(res)) {
           resolve({
             errCode: 0,
             errMessage: 'Success!',
