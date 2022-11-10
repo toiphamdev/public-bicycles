@@ -2,6 +2,7 @@ const express = require('express');
 const userController = require('../controllers/UserController');
 const { accessMidleware } = require('../middleware/JWTMidleware');
 const allcodeController = require('../controllers/AllcodeController');
+const placeController = require('../controllers/PlaceController');
 
 const router = express.Router();
 let initWebRoutes = (app) => {
@@ -22,6 +23,9 @@ let initWebRoutes = (app) => {
   router.get('/', (req, res) => {
     res.send('Toouir gì làm khó a!');
   });
+
+  //place
+  router.get('/api/get-all-place', placeController.getAllPlace);
 
   app.use('/', router);
 };

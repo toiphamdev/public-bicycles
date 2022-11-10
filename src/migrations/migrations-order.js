@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      senderEmail: {
+      placeId: {
         type: Sequelize.STRING,
       },
       fullName: {
@@ -20,32 +20,17 @@ module.exports = {
       address: {
         type: Sequelize.TEXT,
       },
-      service: {
-        type: Sequelize.STRING,
-      },
       orderCode: {
-        type: Sequelize.STRING,
-      },
-      isDraft: {
-        type: Sequelize.BOOLEAN,
-      },
-      collectMoney: {
-        type: Sequelize.STRING,
-      },
-      freightPayer: {
-        type: Sequelize.STRING,
-      },
-      receivePlace: {
         type: Sequelize.STRING,
       },
       statusId: {
         type: Sequelize.STRING,
       },
-      releaseTime: {
+      timeType: {
         type: Sequelize.STRING,
       },
-      note: {
-        type: Sequelize.STRING,
+      isPay: {
+        type: Sequelize.BOOLEAN,
       },
       price: {
         type: Sequelize.INTEGER,
