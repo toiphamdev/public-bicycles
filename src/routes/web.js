@@ -27,6 +27,10 @@ let initWebRoutes = (app) => {
   //place
   router.get('/api/get-all-place', placeController.getAllPlace);
   router.get('/api/get-detail-place', placeController.getDetailPlaceById);
+  router.get(
+    '/api/get-place-by-province',
+    placeController.getPlaceByProvinceId
+  );
 
   app.use('/', router);
 };
