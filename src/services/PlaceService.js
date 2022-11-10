@@ -84,7 +84,7 @@ const getPlaceByProvinceIdService = (data) => {
           nest: true,
           raw: false,
         });
-        if (res && res.length > 0) {
+        if (res && res.rows.length > 0) {
           res.rows.map((item) => {
             item.src = Buffer.from(item.src, 'base64').toString('binary');
             return item;
