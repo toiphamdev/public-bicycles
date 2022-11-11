@@ -74,33 +74,61 @@ const getPlaceByProvinceIdService = (data) => {
       } else {
         const page = +data.page;
         const size = +data.size;
-        let res = await db.Place.findAndCountAll({
-          attributes: ['src', 'id', 'altText', 'caption'],
-          where: {
-            provinceId: data.provinceId,
-          },
-          limit: size,
-          offset: (page - 1) * size,
-          nest: true,
-          raw: false,
-        });
-        if (res && res.rows.length > 0) {
-          res.rows.map((item) => {
-            item.src = Buffer.from(item.src, 'base64').toString('binary');
-            return item;
+        if (provinceId === 'ALL') {
+          let res = await db.Place.findAndCountAll({
+            attributes: ['src', 'id', 'altText', 'caption'],
+            limit: size,
+            offset: (page - 1) * size,
+            nest: true,
+            raw: false,
           });
-        }
-        if (res) {
-          resolve({
-            errCode: 0,
-            errMessage: 'get place success!',
-            data: res,
-          });
+          if (res && res.rows.length > 0) {
+            res.rows.map((item) => {
+              item.src = Buffer.from(item.src, 'base64').toString('binary');
+              return item;
+            });
+          }
+          if (res) {
+            resolve({
+              errCode: 0,
+              errMessage: 'get place success!',
+              data: res,
+            });
+          } else {
+            resolve({
+              errCode: 2,
+              errMessage: 'get place failed!',
+            });
+          }
         } else {
-          resolve({
-            errCode: 2,
-            errMessage: 'get place failed!',
+          let res = await db.Place.findAndCountAll({
+            attributes: ['src', 'id', 'altText', 'caption'],
+            where: {
+              provinceId: data.provinceId,
+            },
+            limit: size,
+            offset: (page - 1) * size,
+            nest: true,
+            raw: false,
           });
+          if (res && res.rows.length > 0) {
+            res.rows.map((item) => {
+              item.src = Buffer.from(item.src, 'base64').toString('binary');
+              return item;
+            });
+          }
+          if (res) {
+            resolve({
+              errCode: 0,
+              errMessage: 'get place success!',
+              data: res,
+            });
+          } else {
+            resolve({
+              errCode: 2,
+              errMessage: 'get place failed!',
+            });
+          }
         }
       }
     } catch (error) {
