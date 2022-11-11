@@ -74,7 +74,7 @@ const getPlaceByProvinceIdService = (data) => {
       } else {
         const page = +data.page;
         const size = +data.size;
-        if (provinceId === 'ALL') {
+        if (data.provinceId === 'ALL') {
           let res = await db.Place.findAndCountAll({
             attributes: ['src', 'id', 'altText', 'caption'],
             limit: size,
