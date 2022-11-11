@@ -6,6 +6,7 @@ const getAllPlaceService = () => {
     try {
       let data = await db.Place.findAll({
         attributes: ['src', 'id'],
+        limit: 8,
       });
       if (data && data.length > 0) {
         data.map((item) => {
