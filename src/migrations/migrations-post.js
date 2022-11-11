@@ -1,17 +1,14 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Places', {
+    await queryInterface.createTable('Posts', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      provinceId: {
-        type: Sequelize.TEXT,
-      },
-      image: {
+      src: {
         type: Sequelize.TEXT,
       },
       descriptionMarkdown: {
@@ -40,6 +37,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Places');
+    await queryInterface.dropTable('Posts');
   },
 };

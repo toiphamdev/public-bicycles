@@ -3,6 +3,7 @@ const userController = require('../controllers/UserController');
 const { accessMidleware } = require('../middleware/JWTMidleware');
 const allcodeController = require('../controllers/AllcodeController');
 const placeController = require('../controllers/PlaceController');
+const postController = require('../controllers/PostController');
 
 const router = express.Router();
 let initWebRoutes = (app) => {
@@ -23,6 +24,12 @@ let initWebRoutes = (app) => {
   router.get('/', (req, res) => {
     res.send('Toouir gì làm khó a!');
   });
+
+  //post
+
+  router.get('/api/get-home-post', postController.getHomePostService);
+  router.get('/api/get-detail-post', postController.getDetailPostService);
+  router.get('/api/get-all-post', postController.getAllPostService);
 
   //place
   router.get('/api/get-all-place', placeController.getAllPlace);
