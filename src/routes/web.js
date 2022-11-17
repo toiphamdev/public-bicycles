@@ -38,6 +38,7 @@ let initWebRoutes = (app) => {
     '/api/get-place-by-province',
     placeController.getPlaceByProvinceId
   );
+  router.get('/api/get-place-selected', placeController.getPlaceSelected);
 
   app.use('/', router);
 };

@@ -26,8 +26,18 @@ const getPlaceByProvinceId = async (req, res) => {
   }
 };
 
+const getPlaceSelected = async (req, res) => {
+  try {
+    let data = await placeService.getPlaceSelectedService(req.query);
+    res.status(200).json(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   getAllPlace,
   getDetailPlaceById,
   getPlaceByProvinceId,
+  getPlaceSelected,
 };

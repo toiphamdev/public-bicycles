@@ -138,8 +138,40 @@ const getPlaceByProvinceIdService = (data) => {
   });
 };
 
+const getPlaceSelectedService = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (!data.provinceId) {
+        resolve({
+          errCode: 1,
+          errMessage: 'Missing required parameter!',
+        });
+      } else {
+        let res = await db.Place.findAndCountAll({
+          attributes: ['id', 'altText'],
+        });
+        if (res) {
+          resolve({
+            errCode: 0,
+            errMessage: 'get place success!',
+            data: res,
+          });
+        } else {
+          resolve({
+            errCode: 2,
+            errMessage: 'get place failed!',
+          });
+        }
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 module.exports = {
   getAllPlaceService,
   getDetailPlaceService,
   getPlaceByProvinceIdService,
+  getPlaceSelectedService,
 };
