@@ -149,6 +149,9 @@ const getPlaceSelectedService = (data) => {
       } else {
         let res = await db.Place.findAll({
           attributes: ['id', 'altText'],
+          where: {
+            provinceId: data.provinceId,
+          },
         });
         if (res) {
           resolve({
