@@ -147,7 +147,7 @@ const getPlaceSelectedService = (data) => {
           errMessage: 'Missing required parameter!',
         });
       } else {
-        let res = await db.Place.findAndCountAll({
+        let res = await db.Place.findAll({
           attributes: ['id', 'altText'],
         });
         if (res) {
