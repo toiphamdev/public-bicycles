@@ -197,6 +197,7 @@ const updatePlaceService = (data) => {
             descriptionMarkdown: data.descriptionMarkdown,
             altText: data.altText,
             caption: data.caption,
+            src: data.src,
             keywords: keywords,
           },
           {
@@ -243,6 +244,7 @@ const createPlaceService = (data) => {
           descriptionHTML: data.descriptionHTML,
           descriptionMarkdown: data.descriptionMarkdown,
           altText: data.altText,
+          src: data.src,
           caption: data.caption,
           keywords: keywords,
         });
