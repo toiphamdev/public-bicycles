@@ -182,7 +182,6 @@ const updatePlaceService = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       if (
-        !data.provinceId ||
         !data.id ||
         !data.descriptionMarkdown ||
         !data.descriptionHTML ||
