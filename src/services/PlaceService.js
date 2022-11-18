@@ -176,8 +176,6 @@ const getPlaceSelectedService = (data) => {
   });
 };
 
-const createNewPlace = (data) => {};
-
 const updatePlaceService = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -195,7 +193,6 @@ const updatePlaceService = (data) => {
         let keywords = genarate.generateKeywords(data.altText);
         let res = db.Place.update(
           {
-            provinceId: data.provinceId,
             descriptionHTML: data.descriptionHTML,
             descriptionMarkdown: data.descriptionMarkdown,
             altText: data.altText,
@@ -226,10 +223,52 @@ const updatePlaceService = (data) => {
   });
 };
 
+const createPlaceService = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (
+        !data.provinceId ||
+        !data.descriptionMarkdown ||
+        !data.descriptionHTML ||
+        !data.altText
+      ) {
+        resolve({
+          errCode: 1,
+          errMessage: 'Missing required parameters',
+        });
+      } else {
+        let keywords = genarate.generateKeywords(data.altText);
+        let res = db.Place.create({
+          provinceId: data.provinceId,
+          descriptionHTML: data.descriptionHTML,
+          descriptionMarkdown: data.descriptionMarkdown,
+          altText: data.altText,
+          caption: data.caption,
+          keywords: keywords,
+        });
+        if (res) {
+          resolve({
+            errCode: 0,
+            errMessage: 'Create success',
+          });
+        } else {
+          resolve({
+            errCode: 2,
+            errMessage: 'Create failed',
+          });
+        }
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 module.exports = {
   getAllPlaceService,
   getDetailPlaceService,
   getPlaceByProvinceIdService,
   getPlaceSelectedService,
   updatePlaceService,
+  createPlaceService,
 };

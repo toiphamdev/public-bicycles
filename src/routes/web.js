@@ -40,6 +40,7 @@ let initWebRoutes = (app) => {
   );
   router.get('/api/get-place-selected', placeController.getPlaceSelected);
   router.put('/api/update-place-by-id', placeController.updatePlace);
+  router.post('/api/create-place', placeController.createPlace);
 
   app.use('/', router);
 };
