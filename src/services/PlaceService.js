@@ -266,6 +266,38 @@ const createPlaceService = (data) => {
   });
 };
 
+const deletePlaceService = (id) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (!id) {
+        resolve({
+          errCode: 1,
+          errMessage: 'Missing required parameters',
+        });
+      } else {
+        let res = db.Place.destroy({
+          where: {
+            id: id,
+          },
+        });
+        if (res) {
+          resolve({
+            errCode: 0,
+            errMessage: 'Delete place success!',
+          });
+        } else {
+          resolve({
+            errCode: 0,
+            errMessage: 'Delete place failed!',
+          });
+        }
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 module.exports = {
   getAllPlaceService,
   getDetailPlaceService,
@@ -273,4 +305,5 @@ module.exports = {
   getPlaceSelectedService,
   updatePlaceService,
   createPlaceService,
+  deletePlaceService,
 };
