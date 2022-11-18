@@ -55,7 +55,7 @@ const createPlace = async (req, res) => {
 
 const deletePlace = async (req, res) => {
   try {
-    let data = await placeService.deletePlaceService(req.body);
+    let data = await placeService.deletePlaceService(req.query.id);
     res.status(200).json(data);
   } catch (error) {
     console.log(error);
