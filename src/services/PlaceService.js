@@ -46,6 +46,9 @@ const getDetailPlaceService = (id) => {
             id: id,
           },
         });
+        if (res && res.src) {
+          res.src = Buffer.from(res.src, 'base64').toString('binary');
+        }
         if (!_.isEmpty(res)) {
           resolve({
             errCode: 0,
