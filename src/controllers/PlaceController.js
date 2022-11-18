@@ -35,9 +35,19 @@ const getPlaceSelected = async (req, res) => {
   }
 };
 
+const updatePlace = async (req, res) => {
+  try {
+    let data = await placeService.updatePlaceService(req.body);
+    res.status(200).json(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   getAllPlace,
   getDetailPlaceById,
   getPlaceByProvinceId,
   getPlaceSelected,
+  updatePlace,
 };

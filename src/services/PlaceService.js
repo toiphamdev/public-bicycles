@@ -1,5 +1,6 @@
 const db = require('../models');
 const _ = require('lodash');
+const genarate = require('../utils/genarateOTP');
 
 const getAllPlaceService = () => {
   return new Promise(async (resolve, reject) => {
@@ -172,9 +173,61 @@ const getPlaceSelectedService = (data) => {
   });
 };
 
+const createNewPlace = (data) => {};
+
+const updatePlaceService = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (
+        !data.provinceId ||
+        !data.id ||
+        !data.descriptionMarkdown ||
+        !data.descriptionHTML ||
+        !data.altText
+      ) {
+        resolve({
+          errCode: 1,
+          errMessage: 'Missing required parameters',
+        });
+      } else {
+        let keywords = genarate.generateKeywords(data.altText);
+        let res = db.Place.update(
+          {
+            provinceId: data.provinceId,
+            descriptionHTML: data.descriptionHTML,
+            descriptionMarkdown: data.descriptionMarkdown,
+            altText: data.altText,
+            caption: data.caption,
+            keywords: keywords,
+          },
+          {
+            where: {
+              id: data.id,
+            },
+          }
+        );
+      }
+      if (res) {
+        resolve({
+          errCode: 0,
+          errMessage: 'update success',
+        });
+      } else {
+        resolve({
+          errCode: 2,
+          errMessage: 'Update failed',
+        });
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 module.exports = {
   getAllPlaceService,
   getDetailPlaceService,
   getPlaceByProvinceIdService,
   getPlaceSelectedService,
+  updatePlaceService,
 };
