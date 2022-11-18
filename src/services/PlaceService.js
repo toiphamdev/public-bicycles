@@ -208,17 +208,17 @@ const updatePlaceService = (data) => {
             },
           }
         );
-      }
-      if (res) {
-        resolve({
-          errCode: 0,
-          errMessage: 'update success',
-        });
-      } else {
-        resolve({
-          errCode: 2,
-          errMessage: 'Update failed',
-        });
+        if (res) {
+          resolve({
+            errCode: 0,
+            errMessage: 'update success',
+          });
+        } else {
+          resolve({
+            errCode: 2,
+            errMessage: 'Update failed',
+          });
+        }
       }
     } catch (error) {
       reject(error);
