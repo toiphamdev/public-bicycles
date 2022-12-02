@@ -195,6 +195,17 @@ const updateUserInfoService = (data) => {
   });
 };
 
+const getNotifyService = ()=>{
+  return new Promise(async(resolve, reject)=>{
+    try {
+      let notifyAll = await db.Notification.findAll()
+      
+    } catch (error) {
+      reject(error)
+    }
+  })
+}
+
 const getUserByIdService = (id) => {
   return new Promise(async (resolve, reject) => {
     try {

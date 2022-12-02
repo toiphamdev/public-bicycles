@@ -4,6 +4,7 @@ const { accessMidleware } = require('../middleware/JWTMidleware');
 const allcodeController = require('../controllers/AllcodeController');
 const placeController = require('../controllers/PlaceController');
 const postController = require('../controllers/PostController');
+const bicycleController = require('../controllers/BicycleController');
 
 const router = express.Router();
 let initWebRoutes = (app) => {
@@ -43,6 +44,13 @@ let initWebRoutes = (app) => {
   router.post('/api/create-place', placeController.createPlace);
   router.delete('/api/delete-place', placeController.deletePlace);
 
+  //bicycles
+  router.post('/api/create-bicycle', bicycleController.createBicycle);
+  router.post('/api/create-type-bicycle', bicycleController.createTypeCycle);
+  router.get(
+    '/api/get-bicycle-by-place',
+    bicycleController.getBicycleByPlaceId
+  );
   app.use('/', router);
 };
 module.exports = initWebRoutes;
