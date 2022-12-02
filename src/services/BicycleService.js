@@ -64,17 +64,21 @@ const createTypeCycleService = (data) => {
 const getBicycleByPlaceIdService = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      if (!data.placeId) {
+      if (!data.placeId || !data.page || !data.size) {
         resolve({
           errCode: 1,
           errMessage: 'Missing required parameters',
         });
       } else {
+        const page = +data.page;
+        const size = +data.size;
         let res = await db.Bicycle.findAndCountAll({
           where: {
             placeId: data.placeId,
             isRentting: false,
           },
+          limit: size,
+          offset: (page - 1) * size,
           include: [
             {
               model: db.TypeCycle,
