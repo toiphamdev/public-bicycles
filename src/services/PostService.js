@@ -107,8 +107,148 @@ const getAllPostService = (data) => {
   });
 };
 
+const getPostService = () => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let res = await db.Post.findAll({
+        attributes: ['id', 'altText'],
+      });
+      if (res) {
+        resolve({
+          errCode: 0,
+          errMessage: 'get post success!',
+          data: res,
+        });
+      } else {
+        resolve({
+          errCode: 2,
+          errMessage: 'get post failed!',
+        });
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+const updatePostService = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (
+        !data.id ||
+        !data.descriptionMarkdown ||
+        !data.descriptionHTML ||
+        !data.altText
+      ) {
+        resolve({
+          errCode: 1,
+          errMessage: 'Missing required parameters',
+        });
+      } else {
+        let res = db.Post.update(
+          {
+            descriptionHTML: data.descriptionHTML,
+            descriptionMarkdown: data.descriptionMarkdown,
+            altText: data.altText,
+            caption: data.caption,
+            src: data.src,
+          },
+          {
+            where: {
+              id: data.id,
+            },
+          }
+        );
+        if (res) {
+          resolve({
+            errCode: 0,
+            errMessage: 'update success',
+          });
+        } else {
+          resolve({
+            errCode: 2,
+            errMessage: 'Update failed',
+          });
+        }
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+const createPostService = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (!data.descriptionMarkdown || !data.descriptionHTML || !data.altText) {
+        resolve({
+          errCode: 1,
+          errMessage: 'Missing required parameters',
+        });
+      } else {
+        let res = await db.Post.create({
+          descriptionHTML: data.descriptionHTML,
+          descriptionMarkdown: data.descriptionMarkdown,
+          altText: data.altText,
+          src: data.src,
+          caption: data.caption,
+        });
+        if (res) {
+          resolve({
+            errCode: 0,
+            errMessage: 'Create success',
+          });
+        } else {
+          resolve({
+            errCode: 2,
+            errMessage: 'Create failed',
+          });
+        }
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+const deletePostService = (id) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (!id) {
+        resolve({
+          errCode: 1,
+          errMessage: 'Missing required parameters',
+        });
+      } else {
+        let res = db.Post.destroy({
+          where: {
+            id: id,
+          },
+        });
+        if (res) {
+          resolve({
+            errCode: 0,
+            errMessage: 'Delete place success!',
+          });
+        } else {
+          resolve({
+            errCode: 0,
+            errMessage: 'Delete place failed!',
+          });
+        }
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 module.exports = {
   getAllPostService,
   getHomePostService,
   getDetailPostService,
+  createPostService,
+  updatePostService,
+  deletePostService,
+  getPostService,
 };

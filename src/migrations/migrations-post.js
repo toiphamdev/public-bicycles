@@ -23,9 +23,6 @@ module.exports = {
       caption: {
         type: Sequelize.TEXT,
       },
-      keywords: {
-        type: Sequelize.ARRAY(Sequelize.STRING),
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

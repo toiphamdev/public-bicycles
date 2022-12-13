@@ -11,23 +11,23 @@ const db = {};
 let sequelize;
 const customizeConfig = {
   host: process.env.DB_HOST,
-  dialect: 'postgres',
+  dialect: 'mysql',
   logging: false,
   query: {
     raw: true,
   },
   timezone: '+07:00',
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false,
-    },
-  },
+  // dialectOptions: {
+  //   ssl: {
+  //     require: true,
+  //     rejectUnauthorized: false,
+  //   },
+  // },
 };
 sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER_NAME,
-  process.env.DB_USER_PASSWORD,
+  null,
   customizeConfig
 );
 

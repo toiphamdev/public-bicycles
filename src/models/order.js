@@ -9,14 +9,18 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Order.belongsTo(models.Bicycle, {
+        targetKey: 'id',
+        foreignKey: 'bicycleId',
+        as: 'bicycleData',
+      });
     }
   }
   Order.init(
     {
       userEmail: DataTypes.STRING,
-      keyId: DataTypes.STRING,
+      bicycleId: DataTypes.STRING,
       time: DataTypes.STRING,
-      statusId: DataTypes.STRING,
       price: DataTypes.INTEGER,
       isPay: DataTypes.BOOLEAN,
     },

@@ -9,7 +9,6 @@ const salt = bcrypt.genSaltSync(10);
 const createNewUserService = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      console.log(data);
       if (!data.email && !data.password) {
         resolve({
           errCode: 1,
@@ -37,6 +36,7 @@ const createNewUserService = (data) => {
             password: password,
             birthDay: data.birthDay,
             address: data.address,
+            roleId: 'R2',
           });
           resolve({
             errCode: 0,
@@ -195,16 +195,60 @@ const updateUserInfoService = (data) => {
   });
 };
 
-const getNotifyService = ()=>{
-  return new Promise(async(resolve, reject)=>{
+const getNotifyService = (data) => {
+  return new Promise(async (resolve, reject) => {
     try {
-      let notifyAll = await db.Notification.findAll()
-      
+      let notifyAll = await db.Notification.findAll({
+        where: {
+          type: 'ALL',
+          read: false,
+        },
+      });
+      let notifyOne = await db.Notification.findAll({
+        where: {
+          type: 'ONE',
+          userEmail: data.userEmail,
+          read: false,
+        },
+      });
+      resolve({
+        errCode: 0,
+        errMessage: 'get notify success',
+        data: [...notifyAll, ...notifyOne],
+      });
     } catch (error) {
-      reject(error)
+      reject(error);
     }
-  })
-}
+  });
+};
+
+const updateNotifyService = (id) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let res = await db.Notification.update(
+        {
+          read: true,
+        },
+        {
+          where: {
+            id: id,
+          },
+        }
+      );
+      if (res) {
+        resolve({
+          errCode: 0,
+          errMessage: 'Success!',
+        });
+      } else {
+        resolve({
+          errCode: 2,
+          errMessage: 'Failed',
+        });
+      }
+    } catch (error) {}
+  });
+};
 
 const getUserByIdService = (id) => {
   return new Promise(async (resolve, reject) => {
@@ -339,4 +383,6 @@ module.exports = {
   getUserByIdService,
   sendOTP,
   loginWithOTPService,
+  getNotifyService,
+  updateNotifyService,
 };

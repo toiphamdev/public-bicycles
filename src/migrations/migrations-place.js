@@ -9,25 +9,22 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       provinceId: {
-        type: Sequelize.TEXT,
+        type: Sequelize.STRING,
       },
       image: {
-        type: Sequelize.TEXT,
+        type: Sequelize.BLOB,
       },
       descriptionMarkdown: {
-        type: Sequelize.TEXT,
+        type: Sequelize.STRING,
       },
       descriptionHTML: {
-        type: Sequelize.TEXT,
+        type: Sequelize.STRING,
       },
       altText: {
-        type: Sequelize.TEXT,
+        type: Sequelize.STRING,
       },
       caption: {
-        type: Sequelize.TEXT,
-      },
-      keywords: {
-        type: Sequelize.ARRAY(Sequelize.STRING),
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,

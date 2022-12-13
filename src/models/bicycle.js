@@ -14,6 +14,11 @@ module.exports = (sequelize, DataTypes) => {
         targetKey: 'id',
         as: 'typeData',
       });
+      Bicycle.hasMany(models.Order, {
+        foreignKey: 'bicycleId',
+        sourceKey: 'id',
+        as: 'bicycleData',
+      });
     }
   }
   Bicycle.init(
@@ -22,7 +27,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       isLocked: DataTypes.BOOLEAN,
       isRentting: DataTypes.BOOLEAN,
-      orderKey: DataTypes.TEXT,
       placeId: DataTypes.INTEGER,
     },
     {

@@ -54,6 +54,24 @@ const loginWithOTP = async (req, res) => {
   }
 };
 
+const getNotify = async (req, res) => {
+  try {
+    let data = await userService.getNotifyService(req.query);
+    res.status(200).json(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const updateNotify = async (req, res) => {
+  try {
+    let data = await userService.updateNotifyService(req.body.id);
+    res.status(200).json(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   createNewUser,
   handleUserLogin,
@@ -61,4 +79,6 @@ module.exports = {
   updateUserInfo,
   sendMailOTP,
   loginWithOTP,
+  getNotify,
+  updateNotify,
 };

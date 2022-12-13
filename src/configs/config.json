@@ -1,21 +1,14 @@
 {
   "development": {
-    "username": "ewjgapkzrpzowg",
-    "password": "62ef886e792aa83647805aa6e74851062e69092ef14004af28137720f0b82823",
-    "database": "d3h4qcarahlmas",
-    "host": "ec2-3-220-207-90.compute-1.amazonaws.com",
-    "dialect": "postgres",
-    "logging": false,
+    "username": "root",
+    "password": null,
+    "database": "its",
+    "host": "localhost",
+    "dialect": "mysql",
     "query": {
       "raw": true
     },
-    "timezone": "+07:00",
-    "dialectOptions": {
-      "ssl": {
-        "require": true,
-        "rejectUnauthorized": false
-      }
-    }
+    "timezone": "+07:00"
   },
   "test": {
     "username": "root",

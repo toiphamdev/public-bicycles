@@ -190,15 +190,13 @@ const updatePlaceService = (data) => {
           errMessage: 'Missing required parameters',
         });
       } else {
-        let keywords = genarate.generateKeywords(data.altText);
-        let res = db.Place.update(
+        let res = await db.Place.update(
           {
             descriptionHTML: data.descriptionHTML,
             descriptionMarkdown: data.descriptionMarkdown,
             altText: data.altText,
             caption: data.caption,
             src: data.src,
-            keywords: keywords,
           },
           {
             where: {
@@ -239,7 +237,7 @@ const createPlaceService = (data) => {
         });
       } else {
         let keywords = genarate.generateKeywords(data.altText);
-        let res = db.Place.create({
+        let res = await db.Place.create({
           provinceId: data.provinceId,
           descriptionHTML: data.descriptionHTML,
           descriptionMarkdown: data.descriptionMarkdown,
